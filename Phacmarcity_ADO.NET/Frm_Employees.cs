@@ -11,12 +11,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.Linq;
+using System.Data.Linq.Mapping;
 
 namespace Phacmarcity_ADO.NET
 {
     public partial class Frm_Employees : Form
     {
-        DataTable dtNhanVien = null;
         // Khai báo biến kiểm tra việc Thêm hay Sửa dữ liệu 
         bool Them;
         string err;
@@ -46,13 +47,9 @@ namespace Phacmarcity_ADO.NET
             try
             {
                 reset();
-                dgvNhanVien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                dtNhanVien = new DataTable();
-                dtNhanVien.Clear();
-                DataSet ds = dbTP.LayNhanVien();
-                dtNhanVien = ds.Tables[0];
                 // Đưa dữ liệu lên DataGridView 
-                dgvNhanVien.DataSource = dtNhanVien;
+                dgvNhanVien.DataSource = dbTP.LayNhanVien();
+                dgvNhanVien.Columns["TaiKhoan"].Visible= false;
                 // Thay đổi độ rộng cột 
                 dgvNhanVien.AutoResizeColumns();
                 // Xóa trống các đối tượng trong Panel 
@@ -112,13 +109,8 @@ namespace Phacmarcity_ADO.NET
         {
             try
             {
-                dgvNhanVien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                dtNhanVien = new DataTable();
-                dtNhanVien.Clear();
-                DataSet ds = dbTP.TimKiemNhanVien(input, key);
-                dtNhanVien = ds.Tables[0];
                 // Đưa dữ liệu lên DataGridView 
-                dgvNhanVien.DataSource = dtNhanVien;
+                dgvNhanVien.DataSource = dbTP.TimKiemNhanVien(input,key);
                 // Thay đổi độ rộng cột 
                 dgvNhanVien.AutoResizeColumns();
                 // Xóa trống các đối tượng trong Panel 
@@ -197,6 +189,8 @@ namespace Phacmarcity_ADO.NET
             dgvNhanVien.Rows[r].Cells[3].Value.ToString();
             this.txtSDT.Text =
             dgvNhanVien.Rows[r].Cells[4].Value.ToString();
+            this.dtpNgayVaoLam.Text =
+            dgvNhanVien.Rows[r].Cells[5].Value.ToString();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -223,7 +217,7 @@ namespace Phacmarcity_ADO.NET
                 {
                     // Thực hiện lệnh 
                     BLNhanVien blTp = new BLNhanVien();
-                    blTp.ThemNhanVien(this.txtMaNhanVien.Text, this.txtTenNhanVien.Text, dtpNgaySinh.Value, cbxBoPhan.SelectedItem.ToString(), txtSDT.Text, ref err);
+                    blTp.ThemNhanVien(this.txtMaNhanVien.Text, this.txtTenNhanVien.Text, dtpNgaySinh.Value, cbxBoPhan.SelectedItem.ToString(), txtSDT.Text,this.dtpNgayVaoLam.Value, ref err);
                     // Load lại dữ liệu trên DataGridView 
                     LoadData();
                     reset();
@@ -239,7 +233,7 @@ namespace Phacmarcity_ADO.NET
             {
                 // Thực hiện lệnh 
                 BLNhanVien blTp = new BLNhanVien();
-                blTp.CapNhatNhanVien(this.txtMaNhanVien.Text, this.txtTenNhanVien.Text, dtpNgaySinh.Value, cbxBoPhan.SelectedItem.ToString(), txtSDT.Text, ref err);
+                blTp.CapNhatNhanVien(this.txtMaNhanVien.Text, this.txtTenNhanVien.Text, dtpNgaySinh.Value, cbxBoPhan.SelectedItem.ToString(), txtSDT.Text,this.dtpNgayVaoLam.Value, ref err);
 
                 // Load lại dữ liệu trên DataGridView 
                 LoadData();
@@ -297,19 +291,10 @@ namespace Phacmarcity_ADO.NET
                 switch (typeSearch)
                 {
                     case nameof(Cls_Enum.OptionEmployee.MaNhanVien):
-                        LoadDataSearch(typeSearch, txtTimKiem.Text);
-                        break;
                     case nameof(Cls_Enum.OptionEmployee.HoTen):
-                        LoadDataSearch(typeSearch, txtTimKiem.Text);
-                        break;
                     case nameof(Cls_Enum.OptionEmployee.SoDienThoai):
-                        LoadDataSearch(typeSearch, txtTimKiem.Text);
-                        break;
                     case nameof(Cls_Enum.OptionEmployee.BoPhan):
                         LoadDataSearch(typeSearch, txtTimKiem.Text);
-                        break;
-                    case nameof(Cls_Enum.OptionEmployee.NgaySinh):
-                        LoadDataSearch(typeSearch, dtpTimKiem.Value.ToString());
                         break;
                     default:
                         break;

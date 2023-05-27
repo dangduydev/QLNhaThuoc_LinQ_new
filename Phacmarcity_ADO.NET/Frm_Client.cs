@@ -11,16 +11,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.Linq;
+using System.Data.Linq.Mapping;
 
 namespace Phacmarcity_ADO.NET
 {
     public partial class Frm_Client : Form
     {
-        DataTable dtKhachHang = null;
         // Khai báo biến kiểm tra việc Thêm hay Sửa dữ liệu 
         bool Them;
         string err;
-        BLKhachHang dbTP = new BLKhachHang();
+        BLKhachHang dbKH = new BLKhachHang();
         public Frm_Client()
         {
             InitializeComponent();
@@ -44,12 +45,8 @@ namespace Phacmarcity_ADO.NET
             {
                 reset();
                 dgvKhachHang.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                dtKhachHang = new DataTable();
-                dtKhachHang.Clear();
-                DataSet ds = dbTP.LayKhachHang();
-                dtKhachHang = ds.Tables[0];
                 // Đưa dữ liệu lên DataGridView 
-                dgvKhachHang.DataSource = dtKhachHang;
+                dgvKhachHang.DataSource = dbKH.LayKhachHang();
                 // Thay đổi độ rộng cột 
                 dgvKhachHang.AutoResizeColumns();
                 // Xóa trống các đối tượng trong Panel 
@@ -63,7 +60,7 @@ namespace Phacmarcity_ADO.NET
                 this.btnEdit.Enabled = true;
                 this.btnDelete.Enabled = true;
                 //
-                //dgvKhachHang_CellClick(null, null);
+                dgvKhachHang_CellClick(null, null);
             }
             catch (SqlException)
             {
@@ -75,13 +72,9 @@ namespace Phacmarcity_ADO.NET
         {
             try
             {
-                dgvKhachHang.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                dtKhachHang = new DataTable();
-                dtKhachHang.Clear();
-                DataSet ds = dbTP.TimKiemKhachHang(input, key);
-                dtKhachHang = ds.Tables[0];
                 // Đưa dữ liệu lên DataGridView 
-                dgvKhachHang.DataSource = dtKhachHang;
+                dgvKhachHang.DataSource = dbKH.TimKiemKhachHang(input, key);
+
                 // Thay đổi độ rộng cột 
                 dgvKhachHang.AutoResizeColumns();
                 // Xóa trống các đối tượng trong Panel 
@@ -95,9 +88,9 @@ namespace Phacmarcity_ADO.NET
                 this.btnEdit.Enabled = true;
                 this.btnDelete.Enabled = true;
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Không lấy được nội dung trong table KhachHang. Lỗi rồi!!!");
+                MessageBox.Show(ex.Message);
 
             }
         }
@@ -248,7 +241,7 @@ namespace Phacmarcity_ADO.NET
                 // Kiểm tra có nhắp chọn nút Ok không? 
                 if (traloi == DialogResult.Yes)
                 {
-                    dbTP.XoaKhachHang(ref err, strKhachHang);
+                    dbKH.XoaKhachHang(ref err, strKhachHang);
                     // Cập nhật lại DataGridView 
                     LoadData();
                     // Thông báo 
@@ -269,25 +262,9 @@ namespace Phacmarcity_ADO.NET
         {
             if (txtTimKiem.Text != null && cbxTimKiem.SelectedIndex != -1)
             {
-
                 string typeSearch = StringConvert.ConvertToEnumClient(cbxTimKiem.SelectedItem.ToString());
-                switch (typeSearch)
-                {
-                    case nameof(Cls_Enum.OptionClient.MaKhachHang):
-                        LoadDataSearch(typeSearch, txtTimKiem.Text);
-                        break;
-                    case nameof(Cls_Enum.OptionClient.TenKhachHang):
-                        LoadDataSearch(typeSearch, txtTimKiem.Text);
-                        break;
-                    case nameof(Cls_Enum.OptionClient.SoDienThoai):
-                        LoadDataSearch(typeSearch, txtTimKiem.Text);
-                        break;
-                    case nameof(Cls_Enum.OptionClient.DiaChi):
-                        LoadDataSearch(typeSearch, txtTimKiem.Text);
-                        break;
-                    default:
-                        break;
-                }
+                LoadDataSearch(typeSearch, txtTimKiem.Text);
+
             }
         }
         #endregion

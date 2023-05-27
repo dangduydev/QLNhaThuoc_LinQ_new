@@ -366,7 +366,7 @@ namespace Phacmarcity_ADO.NET
             this.label16.BackColor = System.Drawing.SystemColors.Control;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold);
             this.label16.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label16.Location = new System.Drawing.Point(796, 142);
+            this.label16.Location = new System.Drawing.Point(796, 128);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(129, 50);
             this.label16.TabIndex = 190;

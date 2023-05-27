@@ -5,44 +5,117 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Phacmarcity_ADO.NET.ENUM;
 
 namespace Phacmarcity_ADO.NET.BS_layer
 {
     class BLKhachHang
     {
-        DBMain db = null;
+        public System.Data.Linq.Table<KhachHang> LayKhachHang()
+        {
+            QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
+            return qlNT.KhachHangs;
+        }
+        public List<KhachHang> TimKiemKhachHang(string input, string key)
+        {
+            QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
 
-        public BLKhachHang()
-        {
-            db = new DBMain();
+            List<KhachHang> khachHangList = null;
+
+            switch (input)
+            {
+                case nameof(Cls_Enum.OptionClient.MaKhachHang):
+                    khachHangList = qlNT.KhachHangs
+                        .Where(kh => kh.MaKhachHang.Contains(key))
+                        .ToList();
+                    break;
+                case nameof(Cls_Enum.OptionClient.TenKhachHang):
+                    khachHangList = qlNT.KhachHangs
+                        .Where(kh => kh.TenKhachHang.Contains(key))
+                        .ToList();
+                    break;
+                case nameof(Cls_Enum.OptionClient.SoDienThoai):
+                    khachHangList = qlNT.KhachHangs
+                        .Where(kh => kh.SoDienThoai.Contains(key))
+                        .ToList();
+                    break;
+                case nameof(Cls_Enum.OptionClient.DiaChi):
+                    khachHangList = qlNT.KhachHangs
+                        .Where(kh => kh.DiaChi.Contains(key))
+                        .ToList();
+                    break;
+                        
+                default:
+                    khachHangList = new List<KhachHang>(); // Trường hợp không hợp lệ
+                    break;
+            }
+
+            return khachHangList;
         }
-        public DataSet LayKhachHang()
-        {
-            return db.ExecuteQueryDataSet("select * from KhachHang", CommandType.Text);
-        }
-        public DataSet TimKiemKhachHang(string input, string key)
-        {
-            return db.ExecuteQueryDataSet("select * from KhachHang Where " + input + " like '%" + key + "%'", CommandType.Text);
-        }
+
+
         public bool ThemKhachHang(string MaKhachHang, string TenKhachHang, string SoDienThoai, string DiaChi, ref string err)
         {
-            string sqlString = "Insert Into KhachHang Values('" +
-            MaKhachHang + "', N'" +
-            TenKhachHang + "', N'" + SoDienThoai + "', N'" + DiaChi + "')";
-
-            return db.MyExecuteNonQuery(sqlString, CommandType.Text, ref err);
+            try
+            {
+                QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
+                KhachHang kh = new KhachHang();
+                kh.MaKhachHang = MaKhachHang;
+                kh.TenKhachHang = TenKhachHang;
+                kh.DiaChi = DiaChi;
+                kh.SoDienThoai = SoDienThoai;
+                qlNT.KhachHangs.InsertOnSubmit(kh);
+                qlNT.KhachHangs.Context.SubmitChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                err = ex.Message;
+                return false;
+            }
 
         }
         public bool XoaKhachHang(ref string err, string MaKhachHang)
         {
-            string sqlString = "Delete From KhachHang Where MaKhachHang='" + MaKhachHang + "'";
-            return db.MyExecuteNonQuery(sqlString, CommandType.Text, ref err);
+            try
+            {
+
+                QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
+                var khQuery = from kh in qlNT.KhachHangs
+                              where kh.MaKhachHang == MaKhachHang
+                              select kh;
+                qlNT.KhachHangs.DeleteAllOnSubmit(khQuery);
+                qlNT.SubmitChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                err = ex.Message;
+                return false;
+            }
         }
         public bool CapNhatKhachHang(string MaKhachHang, string TenKhachHang, string SoDienThoai, string DiaChi, ref string err)
         {
-            string sqlString = "Update KhachHang Set TenKhachHang=N'" +
-            TenKhachHang + "', SoDienThoai= N'" + SoDienThoai + "', DiaChi= N'" + DiaChi + "' Where MaKhachHang='" + MaKhachHang + "'";
-            return db.MyExecuteNonQuery(sqlString, CommandType.Text, ref err);
+            try
+            {
+                QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
+                var khQuery = (from kh in qlNT.KhachHangs
+                               where kh.MaKhachHang == MaKhachHang
+                               select kh).SingleOrDefault();
+                if (khQuery != null)
+                {
+                    khQuery.TenKhachHang = TenKhachHang;
+                    khQuery.DiaChi = DiaChi;
+                    khQuery.SoDienThoai = SoDienThoai;
+                    qlNT.SubmitChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                err = ex.Message;
+                return false;
+            }
         }
     }
 }

@@ -11,45 +11,124 @@ namespace Phacmarcity_ADO.NET.BS_layer
 {
     class BLNhanVien
     {
-        DBMain db = null;
+        public System.Data.Linq.Table<NhanVien> LayNhanVien()
+        {
+            QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
+            return qlNT.NhanViens;
+        }
+        public List<NhanVien> TimKiemNhanVien(string input, string key)
+        {
+            QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
 
-        public BLNhanVien()
-        {
-            db = new DBMain();
-        }
-        public DataSet LayNhanVien()
-        {
-            return db.ExecuteQueryDataSet("select * from NhanVien", CommandType.Text);
-        }
-        public DataSet TimKiemNhanVien(string input, string key)
-        {
-            if (input != nameof(Cls_Enum.OptionEmployee.NgaySinh))
-            {
-                return db.ExecuteQueryDataSet("select * from NhanVien Where " + input + " like '%" + key + "%'", CommandType.Text);
-            }
-            else
-            {
-                return db.ExecuteQueryDataSet("select * from NhanVien Where " + input + " = '" + key + "'", CommandType.Text);
-            }
-        }
-        public bool ThemNhanVien(string MaNhanVien, string HoTen, DateTime NgaySinh, string BoPhan, string SoDienThoai, ref string err)
-        {
-            string sqlString = "Insert Into NhanVien Values('" +
-            MaNhanVien + "', N'" +
-            HoTen + "', '" + NgaySinh + "', N'" + BoPhan + "', N'" + SoDienThoai + "')";
+            List<NhanVien> NhanVienList = null;
 
-            return db.MyExecuteNonQuery(sqlString, CommandType.Text, ref err);
+            switch (input)
+            {
+                case nameof(Cls_Enum.OptionEmployee.MaNhanVien):
+                    NhanVienList = qlNT.NhanViens
+                        .Where(kh => kh.MaNhanVien.Contains(key))
+                        .ToList();
+                    break;
+                case nameof(Cls_Enum.OptionEmployee.HoTen):
+                    NhanVienList = qlNT.NhanViens
+                        .Where(kh => kh.HoTen.Contains(key))
+                        .ToList();
+                    break;
+                case nameof(Cls_Enum.OptionEmployee.SoDienThoai):
+                    NhanVienList = qlNT.NhanViens
+                        .Where(kh => kh.SoDienThoai.Contains(key))
+                        .ToList();
+                    break;
+                case nameof(Cls_Enum.OptionEmployee.NgaySinh):
+                    NhanVienList = qlNT.NhanViens
+                        .Where(kh => kh.NgaySinh.Value.ToString() == key)
+                        .ToList();
+                    break;
+                case nameof(Cls_Enum.OptionEmployee.NgayVaoLam):
+                    NhanVienList = qlNT.NhanViens
+                        .Where(kh => kh.NgayVaoLam.Value.ToString() == key)
+                        .ToList();
+                    break;
+                case nameof(Cls_Enum.OptionEmployee.BoPhan):
+                    NhanVienList = qlNT.NhanViens
+                        .Where(kh => kh.BoPhan.Contains(key))
+                        .ToList();
+                    break;
+                default:
+                    NhanVienList = new List<NhanVien>(); // Trường hợp không hợp lệ
+                    break;
+            }
+
+            return NhanVienList;
+        }
+
+
+        public bool ThemNhanVien(string MaNhanVien, string HoTen, DateTime NgaySinh, string BoPhan, string SoDienThoai,DateTime NgayVaoLam, ref string err)
+        {
+            try
+            {
+                QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
+                NhanVien kh = new NhanVien();
+                kh.MaNhanVien = MaNhanVien;
+                kh.HoTen = HoTen;
+                kh.SoDienThoai = SoDienThoai;
+                kh.BoPhan = BoPhan;
+                kh.NgaySinh = NgaySinh;
+                kh.NgayVaoLam = NgayVaoLam;
+                qlNT.NhanViens.InsertOnSubmit(kh);
+                qlNT.NhanViens.Context.SubmitChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                err = ex.Message;
+                return false;
+            }
 
         }
         public bool XoaNhanVien(ref string err, string MaNhanVien)
         {
-            string sqlString = "Delete From NhanVien Where MaNhanVien='" + MaNhanVien + "'";
-            return db.MyExecuteNonQuery(sqlString, CommandType.Text, ref err);
+            try
+            {
+                QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
+                var khQuery = from kh in qlNT.NhanViens
+                              where kh.MaNhanVien == MaNhanVien
+                              select kh;
+                qlNT.NhanViens.DeleteAllOnSubmit(khQuery);
+                qlNT.SubmitChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                err = ex.Message;
+                return false;
+            }
         }
-        public bool CapNhatNhanVien(string MaNhanVien, string HoTen, DateTime NgaySinh, string BoPhan, string SoDienThoai, ref string err)
+        public bool CapNhatNhanVien(string MaNhanVien, string HoTen, DateTime NgaySinh, string BoPhan, string SoDienThoai, DateTime NgayVaoLam, ref string err)
         {
-            string sqlString = "Update NhanVien Set HoTen=N'" + HoTen + "', SoDienThoai= N'" + SoDienThoai + "', NgaySinh= '" + NgaySinh + "', BoPhan = N'" + BoPhan + "' Where MaNhanVien='" + MaNhanVien + "'";
-            return db.MyExecuteNonQuery(sqlString, CommandType.Text, ref err);
+            try
+            {
+                QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
+                var khQuery = (from kh in qlNT.NhanViens
+                               where kh.MaNhanVien == MaNhanVien
+                               select kh).SingleOrDefault();
+                if (khQuery != null)
+                {
+                    khQuery.HoTen = HoTen;
+                    khQuery.NgaySinh = NgaySinh;
+                    khQuery.SoDienThoai = SoDienThoai;
+                    khQuery.NgayVaoLam = NgayVaoLam;
+                    khQuery.BoPhan= BoPhan;
+                    qlNT.SubmitChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                err = ex.Message;
+                return false;
+            }
         }
+
     }
 }

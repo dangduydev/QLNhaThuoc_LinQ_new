@@ -40,7 +40,7 @@ namespace Phacmarcity_ADO.NET
             this.label3 = new System.Windows.Forms.Label();
             this.cbxBoPhan = new System.Windows.Forms.ComboBox();
             this.dtpNgaySinh = new System.Windows.Forms.DateTimePicker();
-            this.dtJoin = new System.Windows.Forms.DateTimePicker();
+            this.dtpNgayVaoLam = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvNhanVien = new System.Windows.Forms.DataGridView();
             this.label8 = new System.Windows.Forms.Label();
@@ -178,15 +178,15 @@ namespace Phacmarcity_ADO.NET
             this.dtpNgaySinh.Size = new System.Drawing.Size(169, 22);
             this.dtpNgaySinh.TabIndex = 20;
             // 
-            // dtJoin
+            // dtpNgayVaoLam
             // 
-            this.dtJoin.CalendarFont = new System.Drawing.Font("Segoe UI", 16F);
-            this.dtJoin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtJoin.Location = new System.Drawing.Point(13, 194);
-            this.dtJoin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtJoin.Name = "dtJoin";
-            this.dtJoin.Size = new System.Drawing.Size(169, 22);
-            this.dtJoin.TabIndex = 21;
+            this.dtpNgayVaoLam.CalendarFont = new System.Drawing.Font("Segoe UI", 16F);
+            this.dtpNgayVaoLam.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpNgayVaoLam.Location = new System.Drawing.Point(13, 194);
+            this.dtpNgayVaoLam.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dtpNgayVaoLam.Name = "dtpNgayVaoLam";
+            this.dtpNgayVaoLam.Size = new System.Drawing.Size(169, 22);
+            this.dtpNgayVaoLam.TabIndex = 21;
             // 
             // label6
             // 
@@ -248,7 +248,7 @@ namespace Phacmarcity_ADO.NET
             this.label16.BackColor = System.Drawing.SystemColors.Control;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold);
             this.label16.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label16.Location = new System.Drawing.Point(841, 114);
+            this.label16.Location = new System.Drawing.Point(802, 104);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(198, 50);
             this.label16.TabIndex = 150;
@@ -391,7 +391,7 @@ namespace Phacmarcity_ADO.NET
             this.pnlMain.Controls.Add(this.txtMaNhanVien);
             this.pnlMain.Controls.Add(this.cbxBoPhan);
             this.pnlMain.Controls.Add(this.dtpNgaySinh);
-            this.pnlMain.Controls.Add(this.dtJoin);
+            this.pnlMain.Controls.Add(this.dtpNgayVaoLam);
             this.pnlMain.Controls.Add(this.txtTenNhanVien);
             this.pnlMain.Controls.Add(this.txtSDT);
             this.pnlMain.Location = new System.Drawing.Point(258, 160);
@@ -480,7 +480,7 @@ namespace Phacmarcity_ADO.NET
         private Label label3;
         private ComboBox cbxBoPhan;
         private DateTimePicker dtpNgaySinh;
-        private DateTimePicker dtJoin;
+        private DateTimePicker dtpNgayVaoLam;
         private Label label6;
         private TextBox txtPhoneNumber;
         private DataGridView dgvNhanVien;
