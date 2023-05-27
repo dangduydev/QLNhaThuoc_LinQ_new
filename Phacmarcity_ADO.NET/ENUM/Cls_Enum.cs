@@ -10,9 +10,20 @@ namespace Phacmarcity_ADO.NET.ENUM
     {
         public enum OptionPhieuNhap
         {
-            NgaySanXuat,
-            HanSuDung,
-            NgayNhap
+            NgaySX,
+            NgayHH,
+            NgayNhap,
+            MaPN,
+            MaNhanVien,
+            MaNhaCungCap
+        }
+        public enum OptionCTPhieuNhap
+        {
+            MaThuoc,
+            SoLuong,
+            DonGia,
+            NgaySX,
+            NgayHH
         }
         public enum OptionPhieuXuat
         {
@@ -24,17 +35,28 @@ namespace Phacmarcity_ADO.NET.ENUM
             DonGia,
             NgayXuat
         }
-        public enum OptionEmployee
-        {
-            NgaySinh,
-            NgayVaoLam
-        }
         public enum OptionSupplier
         {
             MaNhaCungCap,
             TenNhaCungCap,
             DiaChi,
             ThongTinDaiDien
+        }
+        public enum OptionEmployee
+        {
+            MaNhanVien,
+            HoTen,
+            BoPhan,
+            SoDienThoai,
+            NgaySinh,
+            NgayVaoLam
+        }
+        public enum OptionClient
+        {
+            MaKhachHang,
+            TenKhachHang,
+            SoDienThoai,
+            DiaChi
         }
     }
 }

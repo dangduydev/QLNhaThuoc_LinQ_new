@@ -1,15 +1,15 @@
 ﻿using Phacmarcity_ADO.NET.DB_layer;
-using Phacmarcity_ADO.NET.ENUM;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Phacmarcity_ADO.NET.ENUM;
 
 namespace Phacmarcity_ADO.NET.BS_layer
 {
-    class BL_Supplier
+    internal class BL_Supplier
     {
         DBMain db = null;
         public BL_Supplier()

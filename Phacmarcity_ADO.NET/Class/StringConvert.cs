@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Globalization;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
@@ -15,23 +14,35 @@ namespace Phacmarcity_ADO.NET.Class
             switch (input)
             {
                 case "Ngày sản xuất":
-                    return "NgaySanXuat";
+                    return "NgaySX";
                 case "Hạn sử dụng":
-                    return "HanSuDung";
+                    return "NgayHH";
                 case "Ngày nhập":
                     return "NgayNhap";
+                case "Mã phiếu nhập":
+                    return "MaPN";
+                case "Mã nhân viên":
+                    return "MaNhanVien";
+                case "Mã thuốc":
+                    return "MaThuoc";
+                case "Nhà cung cấp":
+                    return "MaNhaCungCap";
+                case "Số lượng":
+                    return "SoLuong";
+                case "Đơn giá":
+                    return "DonGia";
                 default:
                     return "";
             }
         }
         public static string ConvertToEnumPhieuXuat(string input)
         {
-/*            Mã phiếu xuất
-            Mã nhân viên
-            Mã khách hàng
-            Mã thuốc
-            Số lượng
-            Ngày xuất*/
+            /*            Mã phiếu xuất
+                        Mã nhân viên
+                        Mã khách hàng
+                        Mã thuốc
+                        Số lượng
+                        Ngày xuất*/
             switch (input)
             {
                 case "Mã phiếu xuất":
@@ -51,25 +62,13 @@ namespace Phacmarcity_ADO.NET.Class
                     return "";
             }
         }
-        public static string ConvertToEnumEmployee(string input)
-        {
-            switch (input)
-            {
-                case "Ngày sinh":
-                    return "NgaySinh";
-                case "Ngày vào làm":
-                    return "NgayVaoLam";
-                
-                default:
-                    return "";
-            }
-        }
+
         public static string ConvertToEnumSupplier(string input)
         {
-/*            Mã nhà cung cấp
-        Tên nhà cung cấp
-        Địa chỉ
-            Thông tin địa diện*/
+            /*            Mã nhà cung cấp
+                    Tên nhà cung cấp
+                    Địa chỉ
+                        Thông tin địa diện*/
             switch (input)
             {
                 case "Mã nhà cung cấp":
@@ -84,5 +83,44 @@ namespace Phacmarcity_ADO.NET.Class
                     return "";
             }
         }
+        public static string ConvertToEnumEmployee(string input)
+        {
+            switch (input)
+            {
+                case "Ngày sinh":
+                    return "NgaySinh";
+                case "Ngày vào làm":
+                    return "NgayVaoLam";
+                case "Mã nhân viên":
+                    return "MaNhanVien";
+                case "Tên nhân viên":
+                    return "HoTen";
+                case "Số điện thoại":
+                    return "SoDienThoai";
+                case "Bộ phận":
+                    return "BoPhan";
+
+                default:
+                    return "";
+            }
+        }
+        public static string ConvertToEnumClient(string input)
+        {
+            switch (input)
+            {
+                case "Mã khách hàng":
+                    return "MaKhachHang";
+                case "Tên khách hàng":
+                    return "TenKhachHang";
+                case "Số điện thoại":
+                    return "SoDienThoai";
+                case "Địa chỉ":
+                    return "DiaChi";
+                default:
+                    return "";
+            }
+        }
+
+
     }
 }

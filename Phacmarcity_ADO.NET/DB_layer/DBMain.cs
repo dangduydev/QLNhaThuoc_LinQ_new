@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-using System.Data.SqlClient;
-
-using Phacmarcity_ADO.NET.BS_layer;
-using System.Data;
 
 namespace Phacmarcity_ADO.NET.DB_layer
 {
@@ -34,6 +31,7 @@ namespace Phacmarcity_ADO.NET.DB_layer
             da.Fill(ds);
             return ds;
         }
+
         public bool MyExecuteNonQuery(string strSQL, CommandType ct, ref string error)
         {
             bool f = false;
@@ -57,5 +55,6 @@ namespace Phacmarcity_ADO.NET.DB_layer
             }
             return f;
         }
+
     }
 }

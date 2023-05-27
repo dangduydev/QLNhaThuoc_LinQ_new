@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Phacmarcity_ADO.NET.DB_layer;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-
-using Phacmarcity_ADO.NET.DB_layer;
 using Phacmarcity_ADO.NET.ENUM;
-using System.Windows.Forms;
 
 namespace Phacmarcity_ADO.NET.BS_layer
 {
@@ -23,19 +20,21 @@ namespace Phacmarcity_ADO.NET.BS_layer
         {
             return db.ExecuteQueryDataSet("SELECT * FROM PhieuXuat JOIN CTPhieuXuat ON PhieuXuat.MaPX = CTPhieuXuat.MaPX", CommandType.Text);
         }
-        public bool ThemPhieuXuat(string MaPX, 
+        public bool ThemPhieuXuat(string MaPX,
             string MaNhanVien,
-            string MaKhachHang, 
+            string MaKhachHang,
             string MaThuoc,
             string SoLuong,
-            string DonGia,DateTime NgayXuat,
+            string DonGia, DateTime NgayXuat,
             ref string err)
         {
             string sqlString = "INSERT INTO PhieuXuat (MaPX, MaNhanVien, MaKhachHang, NgayXuat) VALUES ('" + MaPX + "', '" + MaNhanVien + "', '" + MaKhachHang + "', '" + NgayXuat.ToString("yyyy-MM-dd") + "');" +
                        "INSERT INTO CTPhieuXuat (MaPX, MaThuoc, SoLuong, DonGia) VALUES ('" + MaPX + "', '" + MaThuoc + "', " + SoLuong + ", " + DonGia + ");";
             return db.MyExecuteNonQuery(sqlString, CommandType.Text, ref err);
         }
-        public DataSet TimKiemPhieuXuat(string input,string tuKhoa)
+
+
+        public DataSet TimKiemPhieuXuat(string input, string tuKhoa)
         {
             string query = @"WITH PhieuXuatNew AS (
                         SELECT PhieuXuat.MaPx, PhieuXuat.MaNhanVien, PhieuXuat.MaKhachHang, PhieuXuat.NgayXuat, CTPhieuXuat.MaThuoc, CTPhieuXuat.SoLuong, CTPhieuXuat.DonGia
@@ -47,7 +46,7 @@ namespace Phacmarcity_ADO.NET.BS_layer
                     WHERE ";
 
             switch (input)
-            {   
+            {
                 case nameof(Cls_Enum.OptionPhieuXuat.MaPX):
                 case nameof(Cls_Enum.OptionPhieuXuat.MaNhanVien):
                 case nameof(Cls_Enum.OptionPhieuXuat.MaKhachHang):
