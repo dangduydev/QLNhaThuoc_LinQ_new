@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{04CA3936-1A4C-470C-A45C-1B95B5C1F9BC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Phacmarcity_ADO.NET</RootNamespace>
+    <AssemblyName>Phacmarcity_ADO.NET</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BS layer\BLProduce_Product.cs" />
+    <Compile Include="BS layer\BL_Supplier.cs" />
+    <Compile Include="Class\StringConvert.cs" />
+    <Compile Include="DB_layer\DBMain.cs" />
+    <Compile Include="ENUM\Cls_Enum.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Login.Designer.cs">
+      <DependentUpon>Frm_Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Frm_Login.resx">
+      <DependentUpon>Frm_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\Report1.rdlc" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\add.png" />
+    <None Include="Resources\card1.png" />
+    <None Include="Resources\see_feedback1.png" />
+    <None Include="Resources\report1.png" />
+    <None Include="Resources\production1.png" />
+    <None Include="Resources\PhieuXuat1.jpg" />
+    <None Include="Resources\PhieuNhap1.png" />
+    <None Include="Resources\notes1.png" />
+    <None Include="Resources\nha_cung_cap1.png" />
+    <None Include="Resources\medicine1.png" />
+    <None Include="Resources\logo1.png" />
+    <None Include="Resources\group1.png" />
+    <None Include="Resources\employee %281%291.png" />
+    <None Include="Resources\content-creator1.png" />
+    <None Include="Resources\BoYTe1.jpg" />
+    <None Include="Resources\bill1.png" />
+    <None Include="Resources\bacsi1.jpg" />
+    <None Include="Resources\add1.png" />
+    <Content Include="Resources\bacsi.jpg" />
+    <Content Include="Resources\bill.png" />
+    <Content Include="Resources\BoYTe.jpg" />
+    <Content Include="Resources\card.png" />
+    <Content Include="Resources\content-creator.png" />
+    <Content Include="Resources\employee %281%29.png" />
+    <Content Include="Resources\group.png" />
+    <Content Include="Resources\logo.png" />
+    <Content Include="Resources\medicine.png" />
+    <Content Include="Resources\nha_cung_cap.png" />
+    <Content Include="Resources\notes.png" />
+    <Content Include="Resources\PhieuNhap.png" />
+    <Content Include="Resources\PhieuXuat.jpg" />
+    <Content Include="Resources\production.png" />
+    <Content Include="Resources\report.png" />
+    <Content Include="Resources\see_feedback.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
