@@ -318,5 +318,11 @@ namespace Phacmarcity_ADO.NET
                 }
             }
         }
+
+        private void btnPrintReview_Click(object sender, EventArgs e)
+        {
+            Form form = new Frm_ReportPhieuXuat();
+            form.ShowDialog();
+        }
     }
 }

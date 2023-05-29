@@ -140,7 +140,8 @@ namespace Phacmarcity_ADO.NET
 
         private void picNCC_Click(object sender, EventArgs e)
         {
-
+            Form form = new Frm_Supplier();
+            form.ShowDialog();
         }
 
         private void picHangSX_Click(object sender, EventArgs e)

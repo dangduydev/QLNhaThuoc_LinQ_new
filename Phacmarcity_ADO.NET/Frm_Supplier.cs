@@ -31,12 +31,8 @@ namespace Phacmarcity_ADO.NET
         {
             try
             {
-                dtNCC = new DataTable();
-                dtNCC.Clear();
-                DataSet ds = dbTP.LayNCC();
-                dtNCC = ds.Tables[0];
+                dgvNhaCungCap.DataSource = dbTP.LayNCC();
                 // Đưa dữ liệu lên DataGridView
-                dgvNhaCungCap.DataSource = dtNCC;
                 // Thay đổi độ rộng cột
                 dgvNhaCungCap.AutoResizeColumns();
                 // Xóa trống các đối tượng trong Panel
@@ -65,13 +61,8 @@ namespace Phacmarcity_ADO.NET
         {
             try
             {
-                dgvNhaCungCap.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                dtNCC = new DataTable();
-                dtNCC.Clear();
-                DataSet ds = dbTP.TimKiemNCC(input, key);
-                dtNCC = ds.Tables[0];
                 // Đưa dữ liệu lên DataGridView 
-                dgvNhaCungCap.DataSource = dtNCC;
+                dgvNhaCungCap.DataSource = dbTP.TimKiemNCC(input, key);
                 // Thay đổi độ rộng cột 
                 dgvNhaCungCap.AutoResizeColumns();
                 // Xóa trống các đối tượng trong Panel 
