@@ -1324,7 +1324,7 @@ FROM         CTPhieuNhap INNER JOIN
                       PhieuNhap ON CTPhieuNhap.MaPN = PhieuNhap.MaPN INNER JOIN
                       NhaCungCap ON PhieuNhap.MaNhaCungCap = NhaCungCap.MaNhaCungCap INNER JOIN
                       NhanVien ON PhieuNhap.MaNhanVien = NhanVien.MaNhanVien INNER JOIN
-                      Thuoc ON CTPhieuNhap.MaThuoc = Thuoc.MaThuoc AND NhaCungCap.MaNhaCungCap = Thuoc.MaNhaCungCap
+                      Thuoc ON CTPhieuNhap.MaThuoc = Thuoc.MaThuoc
 WHERE     (PhieuNhap.MaPN = @MaPN)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MaPN", global::System.Data.SqlDbType.VarChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "MaPN", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
