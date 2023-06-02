@@ -171,7 +171,7 @@ namespace Phacmarcity_ADO.NET
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label4.Location = new System.Drawing.Point(35, 400);
+            this.label4.Location = new System.Drawing.Point(40, 398);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(132, 28);
             this.label4.TabIndex = 32;
@@ -182,7 +182,7 @@ namespace Phacmarcity_ADO.NET
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label5.Location = new System.Drawing.Point(35, 368);
+            this.label5.Location = new System.Drawing.Point(40, 366);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(148, 28);
             this.label5.TabIndex = 31;
@@ -193,7 +193,7 @@ namespace Phacmarcity_ADO.NET
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label3.Location = new System.Drawing.Point(35, 272);
+            this.label3.Location = new System.Drawing.Point(40, 270);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(102, 28);
             this.label3.TabIndex = 30;
@@ -204,7 +204,7 @@ namespace Phacmarcity_ADO.NET
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label2.Location = new System.Drawing.Point(35, 176);
+            this.label2.Location = new System.Drawing.Point(40, 174);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(154, 28);
             this.label2.TabIndex = 29;
@@ -234,7 +234,7 @@ namespace Phacmarcity_ADO.NET
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label7.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label7.Location = new System.Drawing.Point(35, 208);
+            this.label7.Location = new System.Drawing.Point(40, 206);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(141, 28);
             this.label7.TabIndex = 43;
@@ -254,7 +254,7 @@ namespace Phacmarcity_ADO.NET
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label8.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label8.Location = new System.Drawing.Point(35, 240);
+            this.label8.Location = new System.Drawing.Point(40, 238);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(142, 28);
             this.label8.TabIndex = 44;
@@ -265,7 +265,7 @@ namespace Phacmarcity_ADO.NET
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label9.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label9.Location = new System.Drawing.Point(35, 304);
+            this.label9.Location = new System.Drawing.Point(40, 302);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(97, 28);
             this.label9.TabIndex = 47;
@@ -285,7 +285,7 @@ namespace Phacmarcity_ADO.NET
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label6.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label6.Location = new System.Drawing.Point(35, 336);
+            this.label6.Location = new System.Drawing.Point(40, 334);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(87, 28);
             this.label6.TabIndex = 49;
@@ -316,7 +316,7 @@ namespace Phacmarcity_ADO.NET
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label10.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label10.Location = new System.Drawing.Point(35, 432);
+            this.label10.Location = new System.Drawing.Point(40, 430);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(115, 28);
             this.label10.TabIndex = 50;
@@ -389,7 +389,7 @@ namespace Phacmarcity_ADO.NET
             this.btnSearch.BackColor = System.Drawing.Color.DarkCyan;
             this.btnSearch.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.btnSearch.ForeColor = System.Drawing.Color.White;
-            this.btnSearch.Location = new System.Drawing.Point(35, 470);
+            this.btnSearch.Location = new System.Drawing.Point(35, 478);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(113, 41);
@@ -475,7 +475,7 @@ namespace Phacmarcity_ADO.NET
             this.pnlMain.Controls.Add(this.txtSoLuong);
             this.pnlMain.Controls.Add(this.txtGia);
             this.pnlMain.Controls.Add(this.dtpNgayNhap);
-            this.pnlMain.Location = new System.Drawing.Point(228, 154);
+            this.pnlMain.Location = new System.Drawing.Point(228, 161);
             this.pnlMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(197, 300);

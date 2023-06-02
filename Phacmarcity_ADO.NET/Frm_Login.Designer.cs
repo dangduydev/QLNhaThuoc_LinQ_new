@@ -112,6 +112,7 @@ namespace Phacmarcity_ADO.NET
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(312, 34);
             this.txtUser.TabIndex = 3;
+            this.txtUser.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUser_KeyDown);
             // 
             // txtPass
             // 
@@ -122,6 +123,7 @@ namespace Phacmarcity_ADO.NET
             this.txtPass.Size = new System.Drawing.Size(312, 34);
             this.txtPass.TabIndex = 4;
             this.txtPass.UseSystemPasswordChar = true;
+            this.txtPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPass_KeyDown);
             // 
             // label2
             // 

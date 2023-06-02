@@ -103,6 +103,7 @@
     <Compile Include="BS layer\BLNhanVien.cs" />
     <Compile Include="BS layer\BLPhieuNhap.cs" />
     <Compile Include="BS layer\BLProduce_Product.cs" />
+    <Compile Include="BS layer\BLThuoc.cs" />
     <Compile Include="BS layer\BL_Supplier.cs" />
     <Compile Include="Class\AppSettings.cs" />
     <Compile Include="Class\PhieuNhapDTO.cs" />
