@@ -58,5 +58,10 @@ namespace Phacmarcity_ADO.NET.ENUM
             SoDienThoai,
             DiaChi
         }
+        public enum OptionRole
+        {
+            QuanLy,
+            NhanVien
+        }
     }
 }

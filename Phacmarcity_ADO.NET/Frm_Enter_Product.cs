@@ -18,7 +18,6 @@ namespace Phacmarcity_ADO.NET
 {
     public partial class Frm_Enter_Product : Form
     {
-        DataTable dtPhieuNhap = null;
         // Khai báo biến kiểm tra việc Thêm hay Sửa dữ liệu 
         bool Them;
         string err;
@@ -45,12 +44,8 @@ namespace Phacmarcity_ADO.NET
             try
             {
                 reset();
-                dtPhieuNhap = new DataTable();
-                dtPhieuNhap.Clear();
-                DataSet ds = dbTP.LayPhieuNhap();
-                dtPhieuNhap = ds.Tables[0];
                 // Đưa dữ liệu lên DataGridView 
-                dgvPhieuNhap.DataSource = dtPhieuNhap;
+                dgvPhieuNhap.DataSource = dbTP.LayPhieuNhap();
                 // Thay đổi độ rộng cột 
                 dgvPhieuNhap.AutoResizeColumns();
                 // Xóa trống các đối tượng trong Panel 
@@ -75,12 +70,9 @@ namespace Phacmarcity_ADO.NET
         {
             try
             {
-                dtPhieuNhap = new DataTable();
-                dtPhieuNhap.Clear();
-                DataSet ds = dbTP.TimKiemPhieuNhap(input, key);
-                dtPhieuNhap = ds.Tables[0];
+                
                 // Đưa dữ liệu lên DataGridView 
-                dgvPhieuNhap.DataSource = dtPhieuNhap;
+                dgvPhieuNhap.DataSource = dbTP.TimKiemPhieuNhap(input, key);
                 // Thay đổi độ rộng cột 
                 dgvPhieuNhap.AutoResizeColumns();
                 // Xóa trống các đối tượng trong Panel 
@@ -166,9 +158,9 @@ namespace Phacmarcity_ADO.NET
                 try
                 {
                     // Thực hiện lệnh 
-                    BLPhieuNhap blTp = new BLPhieuNhap();
-                    blTp.ThemPhieuNhap(this.txtMaPhieuNhap.Text, this.txtMaNhanVien.Text, this.txtMaNCC.Text, this.dtpNgayNhap.Value, ref err);
-                    blTp.ThemCTPhieuNhap(this.txtMaPhieuNhap.Text, this.txtMaThuoc.Text, int.Parse(this.txtSoLuong.Text), double.Parse(this.txtGia.Text), this.dtpNSX.Value, this.dtpHSD.Value, ref err);
+                    //BLPhieuNhap blTp = new BLPhieuNhap();
+                    dbTP.ThemPhieuNhap(this.txtMaPhieuNhap.Text, this.txtMaNhanVien.Text, this.txtMaNCC.Text, this.dtpNgayNhap.Value, this.txtMaThuoc.Text, int.Parse(this.txtSoLuong.Text), decimal.Parse(this.txtGia.Text), this.dtpNSX.Value, this.dtpHSD.Value, ref err);
+                   
                     // Load lại dữ liệu trên DataGridView 
                     LoadData();
                     reset();
@@ -184,8 +176,7 @@ namespace Phacmarcity_ADO.NET
             {
                 // Thực hiện lệnh 
                 BLPhieuNhap blTp = new BLPhieuNhap();
-                blTp.CapNhatPhieuNhap(this.txtMaPhieuNhap.Text, this.txtMaNhanVien.Text, txtMaNCC.Text, this.dtpNgayNhap.Value, ref err);
-                blTp.CapNhatCTPhieuNhap(this.txtMaPhieuNhap.Text, this.txtMaThuoc.Text, int.Parse((this.txtSoLuong.Text)), this.txtGia.Text, this.dtpNSX.Value, this.dtpHSD.Value, ref err);
+                blTp.CapNhatPhieuNhap(this.txtMaPhieuNhap.Text, this.txtMaNhanVien.Text, txtMaNCC.Text, this.dtpNgayNhap.Value, this.txtMaThuoc.Text, int.Parse((this.txtSoLuong.Text)), decimal.Parse(this.txtGia.Text), this.dtpNSX.Value, this.dtpHSD.Value, ref err);
 
                 // Load lại dữ liệu trên DataGridView 
                 LoadData();

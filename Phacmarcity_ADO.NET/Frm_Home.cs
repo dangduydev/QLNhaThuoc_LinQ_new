@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using Phacmarcity_ADO.NET.Class;
 
 namespace Phacmarcity_ADO.NET
 {
@@ -66,7 +67,10 @@ namespace Phacmarcity_ADO.NET
 
         private void Frm_Home_Load(object sender, EventArgs e)
         {
-
+            if (!AppSettings.flag_role)
+            {
+                picNhanVien.Enabled= false; 
+            }
         }
     }
 }

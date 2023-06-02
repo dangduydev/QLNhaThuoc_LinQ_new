@@ -7,13 +7,12 @@
       <Column Name="MaHangSX" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="MaNhaCungCap" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="CongDung" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
-      <Column Name="MaLoai" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="GhiChu" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Thuoc_CTPhieuXuat" Member="CTPhieuXuats" ThisKey="MaThuoc" OtherKey="MaThuoc" Type="CTPhieuXuat" />
       <Association Name="Thuoc_CTPhieuXuat1" Member="CTPhieuXuats1" ThisKey="MaThuoc" OtherKey="MaThuoc" Type="CTPhieuXuat" />
       <Association Name="Thuoc_CTPhieuNhap" Member="CTPhieuNhaps" ThisKey="MaThuoc" OtherKey="MaThuoc" Type="CTPhieuNhap" />
       <Association Name="NhaCungCap_Thuoc" Member="NhaCungCap" ThisKey="MaNhaCungCap" OtherKey="MaNhaCungCap" Type="NhaCungCap" IsForeignKey="true" />
-      <Association Name="LoaiThuoc_Thuoc" Member="LoaiThuoc" ThisKey="MaLoai" OtherKey="MaLoai" Type="LoaiThuoc" IsForeignKey="true" />
       <Association Name="HangSX_Thuoc" Member="HangSX" ThisKey="MaHangSX" OtherKey="MaHangSX" Type="HangSX" IsForeignKey="true" />
     </Type>
   </Table>
@@ -68,14 +67,6 @@
       <Column Name="ThongTinDaiDien" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Association Name="NhaCungCap_Thuoc" Member="Thuocs" ThisKey="MaNhaCungCap" OtherKey="MaNhaCungCap" Type="Thuoc" />
       <Association Name="NhaCungCap_PhieuNhap" Member="PhieuNhaps" ThisKey="MaNhaCungCap" OtherKey="MaNhaCungCap" Type="PhieuNhap" />
-    </Type>
-  </Table>
-  <Table Name="dbo.LoaiThuoc" Member="LoaiThuocs">
-    <Type Name="LoaiThuoc">
-      <Column Name="MaLoai" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="TenLoai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="LoaiThuoc_Thuoc" Member="Thuocs" ThisKey="MaLoai" OtherKey="MaLoai" Type="Thuoc" />
     </Type>
   </Table>
   <Table Name="dbo.KhachHang" Member="KhachHangs">

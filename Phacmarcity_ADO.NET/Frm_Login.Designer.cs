@@ -107,7 +107,7 @@ namespace Phacmarcity_ADO.NET
             // txtUser
             // 
             this.txtUser.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.txtUser.Location = new System.Drawing.Point(360, 170);
+            this.txtUser.Location = new System.Drawing.Point(360, 177);
             this.txtUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(312, 34);
@@ -116,7 +116,7 @@ namespace Phacmarcity_ADO.NET
             // txtPass
             // 
             this.txtPass.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.txtPass.Location = new System.Drawing.Point(360, 250);
+            this.txtPass.Location = new System.Drawing.Point(360, 266);
             this.txtPass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(312, 34);
@@ -139,7 +139,7 @@ namespace Phacmarcity_ADO.NET
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label3.Location = new System.Drawing.Point(360, 218);
+            this.label3.Location = new System.Drawing.Point(360, 220);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(101, 28);
             this.label3.TabIndex = 6;
@@ -153,7 +153,7 @@ namespace Phacmarcity_ADO.NET
             this.btnDangNhap.BackColor = System.Drawing.Color.Linen;
             this.btnDangNhap.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btnDangNhap.ForeColor = System.Drawing.Color.DarkCyan;
-            this.btnDangNhap.Location = new System.Drawing.Point(452, 310);
+            this.btnDangNhap.Location = new System.Drawing.Point(457, 319);
             this.btnDangNhap.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDangNhap.Name = "btnDangNhap";
             this.btnDangNhap.Size = new System.Drawing.Size(155, 38);

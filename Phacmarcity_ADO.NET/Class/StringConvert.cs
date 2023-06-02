@@ -121,6 +121,19 @@ namespace Phacmarcity_ADO.NET.Class
             }
         }
 
+        public static string ConvertToEnumRole(string input)
+        {
+            switch (input)
+            {
+                case "Quản lý":
+                    return "QuanLy";
+                case "Nhân viên":
+                    return "NhanVien";
+                default:
+                    return "";
+            }
+        }
+
 
     }
 }

@@ -48,9 +48,6 @@ namespace Phacmarcity_ADO.NET
     partial void InsertNhaCungCap(NhaCungCap instance);
     partial void UpdateNhaCungCap(NhaCungCap instance);
     partial void DeleteNhaCungCap(NhaCungCap instance);
-    partial void InsertLoaiThuoc(LoaiThuoc instance);
-    partial void UpdateLoaiThuoc(LoaiThuoc instance);
-    partial void DeleteLoaiThuoc(LoaiThuoc instance);
     partial void InsertKhachHang(KhachHang instance);
     partial void UpdateKhachHang(KhachHang instance);
     partial void DeleteKhachHang(KhachHang instance);
@@ -143,14 +140,6 @@ namespace Phacmarcity_ADO.NET
 			}
 		}
 		
-		public System.Data.Linq.Table<LoaiThuoc> LoaiThuocs
-		{
-			get
-			{
-				return this.GetTable<LoaiThuoc>();
-			}
-		}
-		
 		public System.Data.Linq.Table<KhachHang> KhachHangs
 		{
 			get
@@ -200,9 +189,9 @@ namespace Phacmarcity_ADO.NET
 		
 		private string _CongDung;
 		
-		private string _MaLoai;
-		
 		private string _GhiChu;
+		
+		private System.Nullable<int> _SoLuong;
 		
 		private EntitySet<CTPhieuXuat> _CTPhieuXuats;
 		
@@ -211,8 +200,6 @@ namespace Phacmarcity_ADO.NET
 		private EntitySet<CTPhieuNhap> _CTPhieuNhaps;
 		
 		private EntityRef<NhaCungCap> _NhaCungCap;
-		
-		private EntityRef<LoaiThuoc> _LoaiThuoc;
 		
 		private EntityRef<HangSX> _HangSX;
 		
@@ -230,10 +217,10 @@ namespace Phacmarcity_ADO.NET
     partial void OnMaNhaCungCapChanged();
     partial void OnCongDungChanging(string value);
     partial void OnCongDungChanged();
-    partial void OnMaLoaiChanging(string value);
-    partial void OnMaLoaiChanged();
     partial void OnGhiChuChanging(string value);
     partial void OnGhiChuChanged();
+    partial void OnSoLuongChanging(System.Nullable<int> value);
+    partial void OnSoLuongChanged();
     #endregion
 		
 		public Thuoc()
@@ -242,7 +229,6 @@ namespace Phacmarcity_ADO.NET
 			this._CTPhieuXuats1 = new EntitySet<CTPhieuXuat>(new Action<CTPhieuXuat>(this.attach_CTPhieuXuats1), new Action<CTPhieuXuat>(this.detach_CTPhieuXuats1));
 			this._CTPhieuNhaps = new EntitySet<CTPhieuNhap>(new Action<CTPhieuNhap>(this.attach_CTPhieuNhaps), new Action<CTPhieuNhap>(this.detach_CTPhieuNhaps));
 			this._NhaCungCap = default(EntityRef<NhaCungCap>);
-			this._LoaiThuoc = default(EntityRef<LoaiThuoc>);
 			this._HangSX = default(EntityRef<HangSX>);
 			OnCreated();
 		}
@@ -355,30 +341,6 @@ namespace Phacmarcity_ADO.NET
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaLoai", DbType="VarChar(10)")]
-		public string MaLoai
-		{
-			get
-			{
-				return this._MaLoai;
-			}
-			set
-			{
-				if ((this._MaLoai != value))
-				{
-					if (this._LoaiThuoc.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnMaLoaiChanging(value);
-					this.SendPropertyChanging();
-					this._MaLoai = value;
-					this.SendPropertyChanged("MaLoai");
-					this.OnMaLoaiChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GhiChu", DbType="NVarChar(1000)")]
 		public string GhiChu
 		{
@@ -395,6 +357,26 @@ namespace Phacmarcity_ADO.NET
 					this._GhiChu = value;
 					this.SendPropertyChanged("GhiChu");
 					this.OnGhiChuChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SoLuong", DbType="Int")]
+		public System.Nullable<int> SoLuong
+		{
+			get
+			{
+				return this._SoLuong;
+			}
+			set
+			{
+				if ((this._SoLuong != value))
+				{
+					this.OnSoLuongChanging(value);
+					this.SendPropertyChanging();
+					this._SoLuong = value;
+					this.SendPropertyChanged("SoLuong");
+					this.OnSoLuongChanged();
 				}
 			}
 		}
@@ -468,40 +450,6 @@ namespace Phacmarcity_ADO.NET
 						this._MaNhaCungCap = default(string);
 					}
 					this.SendPropertyChanged("NhaCungCap");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LoaiThuoc_Thuoc", Storage="_LoaiThuoc", ThisKey="MaLoai", OtherKey="MaLoai", IsForeignKey=true)]
-		public LoaiThuoc LoaiThuoc
-		{
-			get
-			{
-				return this._LoaiThuoc.Entity;
-			}
-			set
-			{
-				LoaiThuoc previousValue = this._LoaiThuoc.Entity;
-				if (((previousValue != value) 
-							|| (this._LoaiThuoc.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._LoaiThuoc.Entity = null;
-						previousValue.Thuocs.Remove(this);
-					}
-					this._LoaiThuoc.Entity = value;
-					if ((value != null))
-					{
-						value.Thuocs.Add(this);
-						this._MaLoai = value.MaLoai;
-					}
-					else
-					{
-						this._MaLoai = default(string);
-					}
-					this.SendPropertyChanged("LoaiThuoc");
 				}
 			}
 		}
@@ -1697,144 +1645,6 @@ namespace Phacmarcity_ADO.NET
 		{
 			this.SendPropertyChanging();
 			entity.NhaCungCap = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LoaiThuoc")]
-	public partial class LoaiThuoc : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _MaLoai;
-		
-		private string _TenLoai;
-		
-		private string _GhiChu;
-		
-		private EntitySet<Thuoc> _Thuocs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnMaLoaiChanging(string value);
-    partial void OnMaLoaiChanged();
-    partial void OnTenLoaiChanging(string value);
-    partial void OnTenLoaiChanged();
-    partial void OnGhiChuChanging(string value);
-    partial void OnGhiChuChanged();
-    #endregion
-		
-		public LoaiThuoc()
-		{
-			this._Thuocs = new EntitySet<Thuoc>(new Action<Thuoc>(this.attach_Thuocs), new Action<Thuoc>(this.detach_Thuocs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaLoai", DbType="VarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string MaLoai
-		{
-			get
-			{
-				return this._MaLoai;
-			}
-			set
-			{
-				if ((this._MaLoai != value))
-				{
-					this.OnMaLoaiChanging(value);
-					this.SendPropertyChanging();
-					this._MaLoai = value;
-					this.SendPropertyChanged("MaLoai");
-					this.OnMaLoaiChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenLoai", DbType="NVarChar(50)")]
-		public string TenLoai
-		{
-			get
-			{
-				return this._TenLoai;
-			}
-			set
-			{
-				if ((this._TenLoai != value))
-				{
-					this.OnTenLoaiChanging(value);
-					this.SendPropertyChanging();
-					this._TenLoai = value;
-					this.SendPropertyChanged("TenLoai");
-					this.OnTenLoaiChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GhiChu", DbType="NVarChar(50)")]
-		public string GhiChu
-		{
-			get
-			{
-				return this._GhiChu;
-			}
-			set
-			{
-				if ((this._GhiChu != value))
-				{
-					this.OnGhiChuChanging(value);
-					this.SendPropertyChanging();
-					this._GhiChu = value;
-					this.SendPropertyChanged("GhiChu");
-					this.OnGhiChuChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="LoaiThuoc_Thuoc", Storage="_Thuocs", ThisKey="MaLoai", OtherKey="MaLoai")]
-		public EntitySet<Thuoc> Thuocs
-		{
-			get
-			{
-				return this._Thuocs;
-			}
-			set
-			{
-				this._Thuocs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Thuocs(Thuoc entity)
-		{
-			this.SendPropertyChanging();
-			entity.LoaiThuoc = this;
-		}
-		
-		private void detach_Thuocs(Thuoc entity)
-		{
-			this.SendPropertyChanging();
-			entity.LoaiThuoc = null;
 		}
 	}
 	

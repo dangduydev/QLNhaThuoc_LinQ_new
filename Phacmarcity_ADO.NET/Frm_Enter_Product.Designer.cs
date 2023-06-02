@@ -425,7 +425,7 @@ namespace Phacmarcity_ADO.NET
             // txtTimKiem
             // 
             this.txtTimKiem.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.txtTimKiem.Location = new System.Drawing.Point(19, 37);
+            this.txtTimKiem.Location = new System.Drawing.Point(16, 37);
             this.txtTimKiem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(169, 27);
@@ -515,7 +515,7 @@ namespace Phacmarcity_ADO.NET
             // 
             this.dtpTimKiem.CalendarFont = new System.Drawing.Font("Segoe UI", 16F);
             this.dtpTimKiem.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpTimKiem.Location = new System.Drawing.Point(19, 38);
+            this.dtpTimKiem.Location = new System.Drawing.Point(16, 38);
             this.dtpTimKiem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpTimKiem.Name = "dtpTimKiem";
             this.dtpTimKiem.Size = new System.Drawing.Size(169, 22);
