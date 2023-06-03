@@ -98,6 +98,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BS layer\BLDrugSales.cs" />
     <Compile Include="BS layer\BLKhachHang.cs" />
     <Compile Include="BS layer\BLLogin.cs" />
     <Compile Include="BS layer\BLNhanVien.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="BS layer\BL_Supplier.cs" />
     <Compile Include="Class\AppSettings.cs" />
     <Compile Include="Class\PhieuNhapDTO.cs" />
+    <Compile Include="Class\PhieuXuatDTO.cs" />
     <Compile Include="Class\StringConvert.cs" />
     <Compile Include="DB_layer\DBMain.cs" />
     <Compile Include="ENUM\Cls_Enum.cs" />
@@ -115,6 +117,12 @@
     </Compile>
     <Compile Include="Frm_Client.Designer.cs">
       <DependentUpon>Frm_Client.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_DrugSales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_DrugSales.Designer.cs">
+      <DependentUpon>Frm_DrugSales.cs</DependentUpon>
     </Compile>
     <Compile Include="Frm_Employees.cs">
       <SubType>Form</SubType>
@@ -201,6 +209,9 @@
     </Compile>
     <EmbeddedResource Include="Frm_Client.resx">
       <DependentUpon>Frm_Client.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_DrugSales.resx">
+      <DependentUpon>Frm_DrugSales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_Employees.resx">
       <DependentUpon>Frm_Employees.cs</DependentUpon>

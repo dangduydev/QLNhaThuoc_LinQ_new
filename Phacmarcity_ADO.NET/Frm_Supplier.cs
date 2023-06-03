@@ -27,10 +27,22 @@ namespace Phacmarcity_ADO.NET
         {
             InitializeComponent();
         }
+        void reset()
+        {
+            foreach (Control control in pnlMain.Controls)
+            {
+                if (control is TextBox txt)
+                {
+                    txt.Clear();
+                }
+            }
+            pnlSearch.Enabled = false;
+        }
         void LoadData()
         {
             try
             {
+                reset();
                 dgvNhaCungCap.DataSource = dbTP.LayNCC();
                 // Đưa dữ liệu lên DataGridView
                 // Thay đổi độ rộng cột
@@ -196,6 +208,7 @@ namespace Phacmarcity_ADO.NET
                 BL_Supplier blTp = new BL_Supplier();
                 blTp.CapNhatNCC(this.txtMaNCC.Text, this.txtTenNCC.Text, this.txtDiaChiNCC.Text, this.txtThongTinDD.Text, ref err);// Load lại dữ liệu trên DataGridView
                 LoadData();
+                reset();
                 // Thông báo
                 MessageBox.Show("Đã sửa xong!");
             }

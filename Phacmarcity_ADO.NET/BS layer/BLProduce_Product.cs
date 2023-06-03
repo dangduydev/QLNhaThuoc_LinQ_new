@@ -6,82 +6,225 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Phacmarcity_ADO.NET.ENUM;
+using Phacmarcity_ADO.NET.Class;
 
 namespace Phacmarcity_ADO.NET.BS_layer
 {
     class BLProduce_Product
     {
         DBMain db = null;
-        public BLProduce_Product()
+
+        public List<PhieuXuatDTO> LayPhieuXuat()
         {
-            db = new DBMain();
-        }
-        public DataSet LayPhieuXuat()
-        {
-            return db.ExecuteQueryDataSet("SELECT * FROM PhieuXuat JOIN CTPhieuXuat ON PhieuXuat.MaPX = CTPhieuXuat.MaPX", CommandType.Text);
+            QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
+
+            List<PhieuXuatDTO> phieuXuatList = (from px in qlNT.PhieuXuats
+                                                join ctpx in qlNT.CTPhieuXuats on px.MaPX equals ctpx.MaPX
+                                                select new PhieuXuatDTO
+                                                {
+                                                    MaPX = px.MaPX,
+                                                    MaNhanVien =px.MaNhanVien,
+                                                    MaKhachHang = px.MaKhachHang,
+                                                    NgayXuat = (DateTime)px.NgayXuat,
+                                                    MaThuoc = ctpx.MaThuoc,
+                                                    SoLuong = (int)ctpx.SoLuong,
+                                                    DonGia = ctpx.DonGia.ToString()
+                                                }).ToList();
+
+            return phieuXuatList;
         }
         public bool ThemPhieuXuat(string MaPX,
             string MaNhanVien,
             string MaKhachHang,
             string MaThuoc,
-            string SoLuong,
-            string DonGia, DateTime NgayXuat,
+            int SoLuong,
+            decimal DonGia, DateTime NgayXuat,
             ref string err)
         {
-            string sqlString = "INSERT INTO PhieuXuat (MaPX, MaNhanVien, MaKhachHang, NgayXuat) VALUES ('" + MaPX + "', '" + MaNhanVien + "', '" + MaKhachHang + "', '" + NgayXuat.ToString("yyyy-MM-dd") + "');" +
-                       "INSERT INTO CTPhieuXuat (MaPX, MaThuoc, SoLuong, DonGia) VALUES ('" + MaPX + "', '" + MaThuoc + "', " + SoLuong + ", " + DonGia + ");";
-            return db.MyExecuteNonQuery(sqlString, CommandType.Text, ref err);
+            try
+            {
+                QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
+
+                // Kiểm tra trùng mã phiếu xuất
+                if (qlNT.PhieuXuats.Any(px => px.MaPX == MaPX))
+                {
+                    err = "Mã phiếu nhập đã tồn tại.";
+                    return false;
+                }
+
+                // Tạo mới phiếu nhập và chi tiết phiếu nhập
+                PhieuXuat phieuXuat = new PhieuXuat
+                {
+                    MaPX = MaPX,
+                    MaNhanVien = MaNhanVien,
+                    MaKhachHang = MaKhachHang,
+                    NgayXuat = NgayXuat
+                };
+
+                CTPhieuXuat cTPhieuXuat = new CTPhieuXuat
+                {
+                    MaPX = MaPX,
+                    MaThuoc = MaThuoc,
+                    SoLuong = SoLuong,
+                    DonGia = DonGia
+                };
+
+                // Thêm phiếu xuất và chi tiết phiếu xuất
+                qlNT.PhieuXuats.InsertOnSubmit(phieuXuat);
+                qlNT.CTPhieuXuats.InsertOnSubmit(cTPhieuXuat);
+                qlNT.SubmitChanges();
+
+                // Cập nhật số lượng thuốc
+                var thuoc = qlNT.Thuocs.SingleOrDefault(th => th.MaThuoc == MaThuoc);
+                if (thuoc != null)
+                {
+                    thuoc.SoLuong -= SoLuong;
+                    qlNT.SubmitChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                err = ex.Message;
+                return false;
+            }
         }
 
 
-        public DataSet TimKiemPhieuXuat(string input, string tuKhoa)
+        public List<PhieuXuatDTO> TimKhiemPhieuXuat(string input, string key)
         {
-            string query = @"WITH PhieuXuatNew AS (
-                        SELECT PhieuXuat.MaPx, PhieuXuat.MaNhanVien, PhieuXuat.MaKhachHang, PhieuXuat.NgayXuat, CTPhieuXuat.MaThuoc, CTPhieuXuat.SoLuong, CTPhieuXuat.DonGia
-                        FROM PhieuXuat
-                        JOIN CTPhieuXuat ON PhieuXuat.MaPX = CTPhieuXuat.MaPX
-                    )
-                    SELECT *
-                    FROM PhieuXuatNew
-                    WHERE ";
+            QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
+            List<PhieuXuatDTO> phieuXuatList = null;
 
             switch (input)
             {
                 case nameof(Cls_Enum.OptionPhieuXuat.MaPX):
                 case nameof(Cls_Enum.OptionPhieuXuat.MaNhanVien):
                 case nameof(Cls_Enum.OptionPhieuXuat.MaKhachHang):
-                    query += "PhieuXuatNew." + input + " LIKE '%" + tuKhoa + "%'";
+                    phieuXuatList = (from px in qlNT.PhieuXuats
+                                     join ctpx in qlNT.CTPhieuXuats on px.MaPX equals ctpx.MaPX
+                                     where (input == nameof(Cls_Enum.OptionPhieuXuat.MaPX)
+                                     && px.MaPX.ToString().Contains(key))
+                                           || (input == nameof(Cls_Enum.OptionPhieuXuat.MaNhanVien) && px.MaNhanVien.ToString().Contains(key))
+                                           || px.MaKhachHang.ToString().Contains(key)
+                                     select new PhieuXuatDTO
+                                     {
+                                         MaPX = px.MaPX,
+                                         MaNhanVien = px.MaNhanVien,
+                                         MaKhachHang = px.MaKhachHang,
+                                         NgayXuat = (DateTime)px.NgayXuat,
+                                         MaThuoc = ctpx.MaThuoc,
+                                         SoLuong = (int)ctpx.SoLuong,
+                                         DonGia = ctpx.DonGia.ToString()
+                                     }).ToList();
+
                     break;
                 case nameof(Cls_Enum.OptionPhieuXuat.NgayXuat):
-                    query += "PhieuXuatNew." + input + " = '" + tuKhoa + "'";
+                    DateTime ngayXuat;
+                    if (DateTime.TryParse(key, out ngayXuat))
+                    {
+                        phieuXuatList = (from px in qlNT.PhieuXuats
+                                         join ctpx in qlNT.CTPhieuXuats on px.MaPX equals ctpx.MaPX
+                                         where px.NgayXuat == ngayXuat
+                                         select new PhieuXuatDTO
+                                         {
+                                             MaPX = px.MaPX,
+                                             MaNhanVien = px.MaNhanVien,
+                                             MaKhachHang = px.MaKhachHang,
+                                             NgayXuat = (DateTime)px.NgayXuat,
+                                             MaThuoc = ctpx.MaThuoc,
+                                             SoLuong = (int)ctpx.SoLuong,
+                                             DonGia = ctpx.DonGia.ToString()
+                                         }).ToList();
+                    }
+                    else
+                    {
+                        phieuXuatList = new List<PhieuXuatDTO>();
+                    }
                     break;
                 case nameof(Cls_Enum.OptionPhieuXuat.SoLuong):
                 case nameof(Cls_Enum.OptionPhieuXuat.MaThuoc):
                 case nameof(Cls_Enum.OptionPhieuXuat.DonGia):
-                    query += "PhieuXuatNew." + input + " LIKE '%" + tuKhoa + "%'";
-                    break;
-
-                default:
+                    phieuXuatList = (from px in qlNT.PhieuXuats
+                                     join ctpx in qlNT.CTPhieuXuats on px.MaPX equals ctpx.MaPX
+                                     where (input == nameof(Cls_Enum.OptionPhieuXuat.SoLuong) && ctpx.SoLuong.ToString().Contains(key))
+                                     || (input == nameof(Cls_Enum.OptionPhieuXuat.MaThuoc) && ctpx.MaThuoc.ToString().Contains(key))
+                                     || (input == nameof(Cls_Enum.OptionPhieuXuat.DonGia) && ctpx.DonGia.ToString().Contains(key))
+                                     select new PhieuXuatDTO
+                                     {
+                                         MaPX = px.MaPX,
+                                         MaNhanVien = px.MaNhanVien,
+                                         MaKhachHang = px.MaKhachHang,
+                                         NgayXuat = (DateTime)px.NgayXuat,
+                                         MaThuoc = ctpx.MaThuoc,
+                                         SoLuong = (int)ctpx.SoLuong,
+                                         DonGia = ctpx.DonGia.ToString()
+                                     }).ToList();
                     break;
             }
-            return db.ExecuteQueryDataSet(query, CommandType.Text);
 
+            return phieuXuatList;
         }
 
+        public bool CapNhatPhieuXuat(string MaPX, string MaNhanVien, string MaKhachHang, string MaThuoc, int SoLuong, decimal DonGia, DateTime NgayXuat, ref string err)
+        {
+            try
+            {
+                QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
+                var khQuery = (from kh in qlNT.PhieuXuats
+                               where kh.MaPX == MaPX
+                               select kh).SingleOrDefault();
+
+                khQuery.MaNhanVien = MaNhanVien;
+                khQuery.MaKhachHang = MaKhachHang;
+                khQuery.NgayXuat = NgayXuat;
+
+
+                var cTPhieuXuat = (from ct in qlNT.CTPhieuXuats
+                                   where ct.MaPX == MaPX
+                                   select ct).SingleOrDefault();
+
+                cTPhieuXuat.MaThuoc = MaThuoc;
+                cTPhieuXuat.SoLuong = SoLuong;
+                cTPhieuXuat.DonGia = DonGia;
+
+
+                qlNT.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                err = ex.Message;
+                return false;
+            }
+        }
         public bool XoaPhieuXuat(ref string err, string MaPX)
         {
-            string sqlString = "DELETE FROM CTPhieuXuat WHERE MaPX = '" + MaPX + "';" +
-                               "DELETE FROM PhieuXuat WHERE MaPX = '" + MaPX + "';";
-            return db.MyExecuteNonQuery(sqlString, CommandType.Text, ref err);
-        }
+            try
+            {
+                QLNhaThuocDataContext qlNT = new QLNhaThuocDataContext();
 
-        public bool CapNhatPhieuXuat(string MaPX, string MaNhanVien, string MaKhachHang, string MaThuoc, string SoLuong, string DonGia, DateTime NgayXuat, ref string err)
-        {
-            string sqlString = "UPDATE PhieuXuat SET MaNhanVien = N'" + MaNhanVien + "', MaKhachHang = '" + MaKhachHang + "', NgayXuat = '" + NgayXuat.ToString("yyyy-MM-dd") + "' WHERE MaPX = '" + MaPX + "';" +
-                               "UPDATE CTPhieuXuat SET MaThuoc = N'" + MaThuoc + "', SoLuong = " + SoLuong + ", DonGia = " + DonGia + " WHERE MaPX = '" + MaPX + "';";
-            return db.MyExecuteNonQuery(sqlString, CommandType.Text, ref err);
-        }
+                var phieuXuat = from px in qlNT.PhieuXuats
+                                where px.MaPX == MaPX
+                                select px;
 
+                var cTPhieuXuat = from ctpx in qlNT.CTPhieuXuats
+                                  where ctpx.MaPX == MaPX
+                                  select ctpx;
+
+                qlNT.PhieuXuats.DeleteAllOnSubmit(phieuXuat);
+                qlNT.CTPhieuXuats.DeleteAllOnSubmit(cTPhieuXuat);
+                qlNT.SubmitChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                err = ex.Message;
+                return false;
+            }
+        }
 
     }
 }

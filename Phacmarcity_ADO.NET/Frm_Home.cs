@@ -72,5 +72,10 @@ namespace Phacmarcity_ADO.NET
                 picNhanVien.Enabled= false; 
             }
         }
+
+        private void picXemPhanHoi_Click_1(object sender, EventArgs e)
+        {
+            Form frm = new Frm_DrugSales();
+        }
     }
 }

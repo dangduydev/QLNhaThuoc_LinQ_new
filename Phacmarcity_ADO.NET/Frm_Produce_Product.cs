@@ -43,32 +43,19 @@ namespace Phacmarcity_ADO.NET
             try
             {
                 reset();
-                dtPhieuXuat = new DataTable();
-                dtPhieuXuat.Clear();
-                DataSet ds = dbTP.LayPhieuXuat();
-                dtPhieuXuat = ds.Tables[0];
-                // Đưa dữ liệu lên DataGridView
-                dgvPhieuXuat.DataSource = dtPhieuXuat;
-                // Thay đổi độ rộng cột
+                // Đưa dữ liệu lên DataGridView 
+                dgvPhieuXuat.DataSource = dbTP.LayPhieuXuat();
+                // Thay đổi độ rộng cột 
                 dgvPhieuXuat.AutoResizeColumns();
-                // Xóa trống các đối tượng trong Panel
-                this.txtMaPX.ResetText();
-                this.txtMaNhanVien.ResetText();
-                this.txtMaKhachHang.ResetText();
-                this.txtMaThuoc.ResetText();
-                this.txtSoLuong.ResetText();
-                this.txtGia.ResetText();
-                this.dateTimePicker1.ResetText();
-                // Không cho thao tác trên các nút Lưu / Hủy
+                // Xóa trống các đối tượng trong Panel 
+                //this.txtPhieuNhap.ResetText();
+                // Không cho thao tác trên các nút Lưu / Hủy 
                 this.btnSave.Enabled = false;
-                /*                this.btnHuyBo.Enabled = false;*/
-                this.pnlMain.Enabled = false;
-                // Cho thao tác trên các nút Thêm / Sửa / Xóa /Thoát
+                this.btnCancel.Enabled = false;
+                // Cho thao tác trên các nút Thêm / Sửa / Xóa /Thoát 
                 this.btnAdd.Enabled = true;
                 this.btnEdit.Enabled = true;
                 this.btnDelete.Enabled = true;
-                /*                this.btnTroVe.Enabled = true;*/
-                //
                 dgvPhieuXuat_CellClick(null, null);
             }
             catch (SqlException)
@@ -80,20 +67,15 @@ namespace Phacmarcity_ADO.NET
         {
             try
             {
-                /*dgvPhieuXuat.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;*/
-                dtPhieuXuat = new DataTable();
-                dtPhieuXuat.Clear();
-                DataSet ds = dbTP.TimKiemPhieuXuat(input, tukhoa);
-                dtPhieuXuat = ds.Tables[0];
                 // Đưa dữ liệu lên DataGridView 
-                dgvPhieuXuat.DataSource = dtPhieuXuat;
+                dgvPhieuXuat.DataSource = dbTP.TimKhiemPhieuXuat(input, tukhoa);
                 // Thay đổi độ rộng cột 
                 dgvPhieuXuat.AutoResizeColumns();
                 // Xóa trống các đối tượng trong Panel 
-                /*                this.txtMaPX.ResetText();
-                                this.txtMaNhanVien.ResetText();*/
+                //this.txtPhieuNhap.ResetText();
                 // Không cho thao tác trên các nút Lưu / Hủy 
                 this.btnSave.Enabled = false;
+                this.btnCancel.Enabled = false;
                 // Cho thao tác trên các nút Thêm / Sửa / Xóa /Thoát 
                 this.btnAdd.Enabled = true;
                 this.btnEdit.Enabled = true;
@@ -162,11 +144,13 @@ namespace Phacmarcity_ADO.NET
             this.txtMaKhachHang.Text =
             dgvPhieuXuat.Rows[r].Cells[2].Value.ToString();
             this.txtMaThuoc.Text =
-            dgvPhieuXuat.Rows[r].Cells[5].Value.ToString();
+            dgvPhieuXuat.Rows[r].Cells[4].Value.ToString();
             this.txtSoLuong.Text =
-            dgvPhieuXuat.Rows[r].Cells[6].Value.ToString();
+            dgvPhieuXuat.Rows[r].Cells[5].Value.ToString();
             this.txtGia.Text =
-            dgvPhieuXuat.Rows[r].Cells[7].Value.ToString();
+            dgvPhieuXuat.Rows[r].Cells[6].Value.ToString();
+            this.dateTimePicker1.Text =
+            dgvPhieuXuat.Rows[r].Cells[3].Value.ToString();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -232,7 +216,7 @@ namespace Phacmarcity_ADO.NET
                 {
                     // Thực hiện lệnh
                     BLProduce_Product blTp = new BLProduce_Product();
-                    blTp.ThemPhieuXuat(this.txtMaPX.Text, this.txtMaNhanVien.Text, this.txtMaKhachHang.Text, this.txtMaThuoc.Text, this.txtSoLuong.Text, this.txtGia.Text, this.dateTimePicker1.Value, ref err);
+                    blTp.ThemPhieuXuat(this.txtMaPX.Text, this.txtMaNhanVien.Text, this.txtMaKhachHang.Text, this.txtMaThuoc.Text, int.Parse((this.txtSoLuong.Text)), decimal.Parse(this.txtGia.Text), this.dateTimePicker1.Value, ref err);
                     // Load lại dữ liệu trên DataGridView
                     LoadData();
                     // Thông báo
@@ -247,8 +231,9 @@ namespace Phacmarcity_ADO.NET
             {
                 // Thực hiện lệnh
                 BLProduce_Product blTp = new BLProduce_Product();
-                blTp.CapNhatPhieuXuat(this.txtMaPX.Text, this.txtMaNhanVien.Text, this.txtMaKhachHang.Text, this.txtMaThuoc.Text, this.txtSoLuong.Text, this.txtGia.Text, this.dateTimePicker1.Value, ref err);// Load lại dữ liệu trên DataGridView
+                blTp.CapNhatPhieuXuat(this.txtMaPX.Text, this.txtMaNhanVien.Text, this.txtMaKhachHang.Text, this.txtMaThuoc.Text, int.Parse((this.txtSoLuong.Text)), decimal.Parse(this.txtGia.Text), this.dateTimePicker1.Value, ref err);// Load lại dữ liệu trên DataGridView
                 LoadData();
+                reset();
                 // Thông báo
                 MessageBox.Show("Đã sửa xong!");
             }

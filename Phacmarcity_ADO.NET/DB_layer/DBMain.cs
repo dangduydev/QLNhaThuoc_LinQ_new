@@ -72,5 +72,27 @@ namespace Phacmarcity_ADO.NET.DB_layer
             return f;
         }
 
+        public object MyExecuteScalar(string strSQL, CommandType ct, ref string error)
+        {
+            object result = null;
+            if (conn.State == ConnectionState.Open)
+                conn.Close();
+            conn.Open();
+            comm.CommandText = strSQL;
+            comm.CommandType = ct;
+            try
+            {
+                result = comm.ExecuteScalar();
+            }
+            catch (SqlException ex)
+            {
+                error = ex.Message;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return result;
+        }
     }
 }
