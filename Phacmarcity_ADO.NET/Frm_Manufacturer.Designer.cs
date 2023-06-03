@@ -144,7 +144,7 @@ namespace Phacmarcity_ADO.NET
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label8.ForeColor = System.Drawing.Color.DarkCyan;
-            this.label8.Location = new System.Drawing.Point(40, 304);
+            this.label8.Location = new System.Drawing.Point(38, 300);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(96, 28);
             this.label8.TabIndex = 66;
@@ -164,7 +164,7 @@ namespace Phacmarcity_ADO.NET
             // txtTenHang
             // 
             this.txtTenHang.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.txtTenHang.Location = new System.Drawing.Point(3, 57);
+            this.txtTenHang.Location = new System.Drawing.Point(3, 63);
             this.txtTenHang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTenHang.Name = "txtTenHang";
             this.txtTenHang.Size = new System.Drawing.Size(169, 27);
@@ -212,7 +212,7 @@ namespace Phacmarcity_ADO.NET
             // txtMaHSX
             // 
             this.txtMaHSX.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.txtMaHSX.Location = new System.Drawing.Point(3, 12);
+            this.txtMaHSX.Location = new System.Drawing.Point(3, 21);
             this.txtMaHSX.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMaHSX.Name = "txtMaHSX";
             this.txtMaHSX.Size = new System.Drawing.Size(169, 27);
@@ -298,11 +298,12 @@ namespace Phacmarcity_ADO.NET
             // txtTimKiem
             // 
             this.txtTimKiem.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.txtTimKiem.Location = new System.Drawing.Point(3, 46);
+            this.txtTimKiem.Location = new System.Drawing.Point(3, 36);
             this.txtTimKiem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(169, 27);
             this.txtTimKiem.TabIndex = 163;
+            this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
             // label19
             // 
@@ -319,16 +320,16 @@ namespace Phacmarcity_ADO.NET
             this.pnlMain.Controls.Add(this.txtQuocGia);
             this.pnlMain.Controls.Add(this.txtTenHang);
             this.pnlMain.Controls.Add(this.txtMaHSX);
-            this.pnlMain.Location = new System.Drawing.Point(232, 204);
+            this.pnlMain.Location = new System.Drawing.Point(246, 199);
             this.pnlMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(189, 127);
+            this.pnlMain.Size = new System.Drawing.Size(189, 146);
             this.pnlMain.TabIndex = 165;
             // 
             // txtQuocGia
             // 
             this.txtQuocGia.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.txtQuocGia.Location = new System.Drawing.Point(4, 103);
+            this.txtQuocGia.Location = new System.Drawing.Point(3, 105);
             this.txtQuocGia.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtQuocGia.Name = "txtQuocGia";
             this.txtQuocGia.Size = new System.Drawing.Size(169, 27);
@@ -338,7 +339,7 @@ namespace Phacmarcity_ADO.NET
             // 
             this.pnlSearch.Controls.Add(this.cbxTimKiem);
             this.pnlSearch.Controls.Add(this.txtTimKiem);
-            this.pnlSearch.Location = new System.Drawing.Point(233, 336);
+            this.pnlSearch.Location = new System.Drawing.Point(246, 349);
             this.pnlSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSearch.Name = "pnlSearch";
             this.pnlSearch.Size = new System.Drawing.Size(182, 76);

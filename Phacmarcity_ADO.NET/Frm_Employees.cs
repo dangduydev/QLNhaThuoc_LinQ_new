@@ -70,6 +70,33 @@ namespace Phacmarcity_ADO.NET
                 MessageBox.Show("Không lấy được nội dung trong table NhanVien. Lỗi rồi!!!");
             }
         }
+        void LoadDataSearch(string input, string key)
+        {
+            try
+            {
+                // Đưa dữ liệu lên DataGridView 
+                dgvNhanVien.DataSource = dbTP.TimKiemNhanVien(input, key);
+                // Thay đổi độ rộng cột 
+                dgvNhanVien.AutoResizeColumns();
+                // Xóa trống các đối tượng trong Panel 
+                //this.txtNhanVien.ResetText();
+                this.txtTenNhanVien.ResetText();
+                // Không cho thao tác trên các nút Lưu / Hủy 
+                this.btnSave.Enabled = false;
+                this.btnCancel.Enabled = false;
+                // Cho thao tác trên các nút Thêm / Sửa / Xóa /Thoát 
+                this.btnAdd.Enabled = true;
+                this.btnEdit.Enabled = true;
+                this.btnDelete.Enabled = true;
+            }
+            catch
+            {
+                MessageBox.Show("Không lấy được nội dung trong table NhanVien. Lỗi rồi!!!");
+
+            }
+
+        }
+
         #endregion
 
         #region Event
@@ -105,33 +132,7 @@ namespace Phacmarcity_ADO.NET
                     break;
             }
         }
-        void LoadDataSearch(string input, string key)
-        {
-            try
-            {
-                // Đưa dữ liệu lên DataGridView 
-                dgvNhanVien.DataSource = dbTP.TimKiemNhanVien(input,key);
-                // Thay đổi độ rộng cột 
-                dgvNhanVien.AutoResizeColumns();
-                // Xóa trống các đối tượng trong Panel 
-                //this.txtNhanVien.ResetText();
-                this.txtTenNhanVien.ResetText();
-                // Không cho thao tác trên các nút Lưu / Hủy 
-                this.btnSave.Enabled = false;
-                this.btnCancel.Enabled = false;
-                // Cho thao tác trên các nút Thêm / Sửa / Xóa /Thoát 
-                this.btnAdd.Enabled = true;
-                this.btnEdit.Enabled = true;
-                this.btnDelete.Enabled = true;
-            }
-            catch
-            {
-                MessageBox.Show("Không lấy được nội dung trong table NhanVien. Lỗi rồi!!!");
 
-            }
-            #endregion
-
-        }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -310,5 +311,7 @@ namespace Phacmarcity_ADO.NET
                 LoadDataSearch(typeSearch, dtpTimKiem.Value.ToString());
             }
         }
+        #endregion
+
     }
 }

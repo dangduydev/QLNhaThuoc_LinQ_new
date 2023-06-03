@@ -509,7 +509,6 @@ namespace Phacmarcity_ADO.NET
             this.pnlSearch.Name = "pnlSearch";
             this.pnlSearch.Size = new System.Drawing.Size(197, 69);
             this.pnlSearch.TabIndex = 162;
-            this.pnlSearch.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSearch_Paint);
             // 
             // dtpTimKiem
             // 

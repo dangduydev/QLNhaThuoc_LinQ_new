@@ -36,9 +36,5 @@ namespace Phacmarcity_ADO.NET
 
         }
 
-        private void reportViewer1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

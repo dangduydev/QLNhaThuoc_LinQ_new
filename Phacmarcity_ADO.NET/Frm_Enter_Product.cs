@@ -58,7 +58,7 @@ namespace Phacmarcity_ADO.NET
                 this.btnEdit.Enabled = true;
                 this.btnDelete.Enabled = true;
                 //
-                //dgvPhieuNhap_CellClick(null, null);
+                dgvPhieuNhap_CellClick(null, null);
             }
             catch (SqlException)
             {
@@ -336,11 +336,8 @@ namespace Phacmarcity_ADO.NET
             dgvPhieuNhap_CellClick(null, null);
             reset();
         }
+
         #endregion
 
-        private void pnlSearch_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

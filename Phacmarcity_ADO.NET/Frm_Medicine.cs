@@ -61,7 +61,7 @@ namespace Phacmarcity_ADO.NET
                 this.btnEdit.Enabled = true;
                 this.btnDelete.Enabled = true;
                 //
-                //dgvKhachHang_CellClick(null, null);
+                dgvThuoc_CellClick(null, null);
             }
             catch (SqlException)
             {
@@ -72,13 +72,11 @@ namespace Phacmarcity_ADO.NET
         {
             try
             {
-                //dgvThuoc.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 // Đưa dữ liệu lên DataGridView 
-                dgvThuoc.DataSource = dbTP.LayThuoc();
+                dgvThuoc.DataSource = dbTP.TimKiemThuoc(input, key);
                 // Thay đổi độ rộng cột 
                 dgvThuoc.AutoResizeColumns();
                 // Xóa trống các đối tượng trong Panel 
-                //this.txtKhachHang.ResetText();
                 // Không cho thao tác trên các nút Lưu / Hủy 
                 this.btnSave.Enabled = false;
                 this.btnCancel.Enabled = false;
