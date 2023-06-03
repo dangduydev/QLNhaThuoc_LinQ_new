@@ -120,7 +120,22 @@ namespace Phacmarcity_ADO.NET.Class
                     return "";
             }
         }
-
+        public static string ConvertToEnumMedicine(string input)
+        {
+            switch (input)
+            {
+                case "Mã thuốc":
+                    return "MaThuoc";
+                case "Tên thuốc":
+                    return "TenThuoc";
+                case "Mã hãng sản xuất":
+                    return "MaHangSX";
+                case "Mã nhà cung cấp":
+                    return "MaNhaCungCap";
+                default:
+                    return string.Empty;
+            }
+        }
         public static string ConvertToEnumRole(string input)
         {
             switch (input)
