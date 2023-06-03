@@ -71,5 +71,12 @@ namespace Phacmarcity_ADO.NET.ENUM
             QuanLy,
             NhanVien
         }
+        public enum OptionHangSX
+        {
+            MaHangSX,
+            TenHang,
+            QuocGia
+        }
+
     }
 }

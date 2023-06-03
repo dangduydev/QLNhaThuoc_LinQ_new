@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BS layer\BLDrugSales.cs" />
+    <Compile Include="BS layer\BLHangSX.cs" />
     <Compile Include="BS layer\BLKhachHang.cs" />
     <Compile Include="BS layer\BLLogin.cs" />
     <Compile Include="BS layer\BLNhanVien.cs" />

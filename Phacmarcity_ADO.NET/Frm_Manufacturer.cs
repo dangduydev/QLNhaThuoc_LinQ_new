@@ -48,6 +48,8 @@ namespace Phacmarcity_ADO.NET
             try
             {
                 reset();
+                dgvHangSX.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
                 // Đưa dữ liệu lên DataGridView 
                 dgvHangSX.DataSource = dbTP.LayHangSX();
                 // Thay đổi độ rộng cột 
@@ -72,8 +74,10 @@ namespace Phacmarcity_ADO.NET
         {
             try
             {
-                
+
                 // Đưa dữ liệu lên DataGridView 
+                dgvHangSX.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
                 dgvHangSX.DataSource = dbTP.TimKiemHangSX(input, key);
                 // Thay đổi độ rộng cột 
                 dgvHangSX.AutoResizeColumns();
